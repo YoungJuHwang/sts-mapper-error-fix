@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.tob.mapper.EventMapper">
+ <select id="selectAll" resultType="com.tob.event.EventVO" parameterType="com.tob.global.Command">
+ 	SELECT
+ 	 	EVENT_ID AS evtId,
+ 	 	EVENT_NAME AS evtName,
+ 	 	FROM_DT AS fromDt,
+ 	 	TO_DT AS toDt
+ 	 FROM EVENT
+ </select>
+ <insert id="insert" parameterType="com.tob.event.EventVO" >
+ 	INSERT INTO EVENT
+ 	 (EVENT_ID,EVENT_NAME,FROM_DT,TO_DT)
+ 	VALUES
+ 	 (#{evtId}, #{evtName}, #{fromDt}, #{toDt})
+ </insert>
+ <update id="update" parameterType="com.tob.event.EventVO">
+ 	UPDATE EVENT SET
+ 		EVENT_NAME = #{evtName},
+ 		FROM_DT = #{fromDt},
+ 		TO_DT = #{toDt}
+ 	WHERE EVENT_ID = #{evtId}
+ </update>
+ <delete id="delete" parameterType="string">
+ 	DELETE FROM MOVIE WHERE EVENT_NAME = #{evtName}
+ </delete>
+
+ </mapper>
